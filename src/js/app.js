@@ -88,7 +88,7 @@ let image = document.getElementById('photo');
 
 
 var img = new Image();   
-img.crossOrigin = 'Anonymous';
+img.crossOrigin = 'anonymous';
 img.addEventListener('load', function() {
   
   ctx.drawImage(image, 0, 0, size, size);
