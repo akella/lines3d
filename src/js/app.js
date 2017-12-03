@@ -91,7 +91,7 @@ var img = new Image();
 img.crossOrigin = 'anonymous';
 img.addEventListener('load', function() {
   
-  ctx.drawImage(image, 0, 0, size, size);
+  ctx.drawImage(img, 0, 0, size, size);
   document.body.appendChild(canvas2d);
 
   let data = ctx.getImageData(0, 0, size, size);
