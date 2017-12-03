@@ -85,28 +85,38 @@ canvas2d.height = size;
 
 let image = document.getElementById('photo');
 
-ctx.drawImage(image, 0, 0, size, size);
-document.body.appendChild(canvas2d);
-
-let data = ctx.getImageData(0, 0, size, size);
-data = data.data;
 
 
+var img = new Image();   
+img.addEventListener('load', function() {
+  
+  ctx.drawImage(image, 0, 0, size, size);
+  document.body.appendChild(canvas2d);
 
-for (var y = 0; y < size; y++) {
-  let geometry = new THREE.Geometry();
-  let line = new THREE.Line(geometry, material);
+  let data = ctx.getImageData(0, 0, size, size);
+  data = data.data;
 
-  for (var x = 0; x < size; x++) {
-    var bright = data[(size * y + x) * 4];
-    let vector = new THREE.Vector3(x - 100, y - 100, bright/10 - 100);
 
-    geometry.vertices.push(vector);
+
+  for (var y = 0; y < size; y++) {
+    let geometry = new THREE.Geometry();
+    let line = new THREE.Line(geometry, material);
+
+    for (var x = 0; x < size; x++) {
+      var bright = data[(size * y + x) * 4];
+      let vector = new THREE.Vector3(x - 100, y - 100, bright/10 - 100);
+
+      geometry.vertices.push(vector);
+    }
+
+    group.add(line);
   }
+  // Закончили рисовать девушку
 
-  group.add(line);
-}
-// Закончили рисовать девушку
+}, false);
+img.src = 'img/photo.jpg'; //
+
+
 
 let time = 0;
 function Render() {
